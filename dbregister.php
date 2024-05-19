@@ -44,10 +44,18 @@ $password = generatePassword();
 // Prepare and execute the SQL query to insert the data into the Employee table
 $sql = "INSERT INTO Employee (email, firstName, lastName, gender, phone, salary, dateOfBirth, password) VALUES ('$email', '$firstName', '$lastName', '$gender', '$phone', '$salary', '$dateOfBirth', '$password')";
 
-if ($conn->query($sql) === TRUE) {
-    echo "New record created successfully";
-} else {
-    echo "Error: " . $sql . "<br>" . $conn->error;
+try {
+    if ($conn->query($sql) === TRUE) {
+        echo "New record created successfully";
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+} catch (mysqli_sql_exception $e) {
+    if (strpos($e->getMessage(), 'Duplicate entry') !== false) {
+        echo "User Already Exists";
+    } else {
+        echo "Error: " . $e->getMessage();
+    }
 }
 
 // Close the database connection

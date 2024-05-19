@@ -34,10 +34,10 @@
                 <a class="nav-link" aria-current="page" href="index.html">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="register.html">Register</a>
+                <a class="nav-link" aria-current="page" href="register.php">Register</a>
               </li>     
               <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="login.html">Login</a>
+                <a class="nav-link active" aria-current="page" href="login.php">Login</a>
               </li>    
             </ul>
             <form class="d-flex" role="search">
@@ -49,38 +49,15 @@
       </nav>
       
       <div class="container-md text-center mt-5" style="max-width: 400px;">
-        <div class="mb-4 hero-text">Let's Get Registered !</div>
-        <form action="dbregister.php" method="POST">
+        <div class="mb-4 hero-text">Sign In</div>
+        <form>
             <div class="mb-3 ">
-                <input type="email" class="form-control text-center fs-5 fw-light" id="exampleInputEmail1" aria-describedby="emailHelp" name="email" placeholder="Email address">
-                <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                <input type="email" class="form-control text-center fs-5 fw-light" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email address">
             </div>
             <div class="mb-3">
-                <input type="text" class="form-control text-center fs-5 fw-light" id="firstName" name="firstName" placeholder="First Name">
+                <input type="password" class="form-control text-center fs-5 fw-light" id="password" placeholder="Password">
             </div>
-            <div class="mb-3">
-                <input type="text" class="form-control text-center fs-5 fw-light" id="lastName" name="lastName" placeholder="Last Name">
-            </div>
-            <div class="mb-3">
-                <input type="text" class="form-control text-center fs-5 fw-light" id="phone" name="phone" placeholder="Phone">
-            </div>
-            <div class="mb-3">
-                <input type="text" class="form-control text-center fs-5 fw-light" id="salary" name="salary" placeholder="Salary">
-            </div>
-            <div class="mb-3">
-                <input type="date" class="form-control text-center fs-5 fw-light" id="dob" name="dateOfBirth" placeholder="Date Of Birth">
-            </div>
-            <div class="mb-3">
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="gender" id="male" value="m" checked>
-                    <label class="form-check-label fs-5 fw-light" for="male">Male</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="gender" id="female" value="f">
-                    <label class="form-check-label fs-5 fw-light" for="female">Female</label>
-                </div>
-            </div>
-            <button type="submit" class="btn btn-primary fs-5 fw-light">Register</button>
+            <button type="submit" class="btn btn-primary fs-5 fw-light">Login</button>
         </form>
     </div>
    
