@@ -50,12 +50,12 @@
       
       <div class="container-md text-center mt-5" style="max-width: 400px;">
         <div class="mb-4 hero-text">Sign In</div>
-        <form>
+        <form action="dblogin.php" method="POST">
             <div class="mb-3 ">
-                <input type="email" class="form-control text-center fs-5 fw-light" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email address">
+                <input type="email" name="email" class="form-control text-center fs-5 fw-light" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email address">
             </div>
             <div class="mb-3">
-                <input type="password" class="form-control text-center fs-5 fw-light" id="password" placeholder="Password">
+                <input type="password" name="pass" class="form-control text-center fs-5 fw-light" id="password" placeholder="Password">
             </div>
             <button type="submit" class="btn btn-primary fs-5 fw-light">Login</button>
         </form>
