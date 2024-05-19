@@ -82,6 +82,16 @@
             </div>
             <button type="submit" class="btn btn-primary fs-5 fw-light">Register</button>
         </form>
+        <?php
+
+        if(isset($_GET['error'])) {
+          echo('
+           <div class="alert alert-danger mt-3" role="alert">
+              User with this email already exists
+          </div>');
+        }
+        
+        ?>
     </div>
    
 

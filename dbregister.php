@@ -46,13 +46,16 @@ $sql = "INSERT INTO Employee (email, firstName, lastName, gender, phone, salary,
 
 try {
     if ($conn->query($sql) === TRUE) {
-        echo "New record created successfully";
+        header('Location:login.php');
+        exit();
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
     }
 } catch (mysqli_sql_exception $e) {
     if (strpos($e->getMessage(), 'Duplicate entry') !== false) {
-        echo "User Already Exists";
+        header('Location:register.php?error');
+        exit();
+
     } else {
         echo "Error: " . $e->getMessage();
     }
