@@ -52,7 +52,7 @@
         <div class="mb-4 hero-text">Let's Get Registered !</div>
         <form action="dbregister.php" method="POST">
             <div class="mb-3 ">
-                <input type="email" class="form-control text-center fs-5 fw-light" id="exampleInputEmail1" aria-describedby="emailHelp" name="email" placeholder="Email address">
+                <input type="email" onkeyup="hideAlertBox()" class="form-control text-center fs-5 fw-light" id="exampleInputEmail1" aria-describedby="emailHelp" name="email" placeholder="Email address">
                 <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
             </div>
             <div class="mb-3">
@@ -86,7 +86,7 @@
 
         if(isset($_GET['error'])) {
           echo('
-           <div class="alert alert-danger mt-3" role="alert">
+           <div id="alertbox" class="alert alert-danger mt-3" role="alert">
               User with this email already exists
           </div>');
         }
@@ -95,6 +95,12 @@
     </div>
    
 
+    <script>
+      function hideAlertBox() {
+        const alertBox = document.getElementById("alertbox");
+        alertBox.style.display = "none";
+      }
+    </script>
     
    
 
