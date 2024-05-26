@@ -1,3 +1,12 @@
+
+<?php
+    session_start();
+    if(!isset($_SESSION['userloggedin'])) {
+        header('Location: ../login.php');
+        exit();
+    }
+?>
+
 <?php
     // Enable error reporting
     ini_set('display_errors', 1);
@@ -15,12 +24,7 @@
         // Get the form data
         $title = $_POST['title'];
         $description = $_POST['description'];
-        
-        if(isset($_POST['email'])){
-            $email=$_POST['email'];
-        }else{
-            $email="admin@gmail.com";
-        }
+        $email=$_SESSION['userloggedin'];
 
         
 

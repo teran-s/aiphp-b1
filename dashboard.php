@@ -1,3 +1,11 @@
+<?php
+    session_start();
+    if(!isset($_SESSION['userloggedin'])) {
+        header('Location: login.php');
+        exit();
+    }
+?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -17,6 +25,20 @@
             font-size: 5rem;
             margin-top: 10vh;
             font-weight: 100;
+        }
+        .dash-card-text {
+            text-align: center;
+            color: #333;
+            font-size: 2rem;
+            margin-top: 1vh;
+            font-weight: 100;
+            text-decoration: none;
+        }
+        .dash-card{
+          text-decoration: none;
+        }
+        .dash-card:hover{
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
         }
     </style>
 </head>
@@ -50,8 +72,19 @@
       
       <div class="container-md text-center mt-5" style="max-width: 700px;">
         <div class="mb-4 hero-text">OneStop Dashboard</div>
-        
+
+        <div class="row">
+          
+          
+            <a class="col-4 dash-card card p-3 rounded-5" style="width: 18rem;" href="notes/index.php">
+            <img src="img/dash/notes.png" class="card-img-top" alt="..."/>
+            <h3 class="dash-card-text">Notes App</h3>
+            </a>
+            
+          
+      </div>
     </div>
+    
    
 
     

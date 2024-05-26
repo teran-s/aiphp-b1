@@ -1,3 +1,11 @@
+<?php
+    session_start();
+    if(!isset($_SESSION['userloggedin'])) {
+        header('Location: ../login.php');
+        exit();
+    }
+?>
+
 <!doctype html>
 <html lang="en">
 
@@ -81,6 +89,7 @@
                 $username = "root";
                 $password = "";
                 $dbname = "aiphp";
+                $email=$_SESSION['userloggedin'];
 
                 $conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -90,7 +99,7 @@
                 }
 
                 // SQL query to select the desired columns from the "Employee" table
-                $sql = "SELECT id,createdDate,title,description FROM note ORDER BY createdDate DESC";
+                $sql = "SELECT id,createdDate,title,description FROM note WHERE email = '$email' ORDER BY createdDate DESC";
 
                 // Execute the query
                 $result = $conn->query($sql);

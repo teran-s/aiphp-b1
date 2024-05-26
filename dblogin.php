@@ -38,6 +38,7 @@ if ($result->num_rows === 1) {
     // Verify the password
     if ($user['Password']===$pass) {
         // Redirect to the desired page
+        $_SESSION['userloggedin'] = $uname;
         header("Location: dashboard.php");
         exit();
     } else {
