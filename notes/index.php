@@ -52,7 +52,7 @@
         </div>
     </nav>
 
-    <div class="container-md text-center " style="max-width: 800px;">
+    <div class="container-md text-center " style="max-width: 850px;">
         <div class="mb-2 hero-text">Notes App</div>
         <form action="dbnotes.php" method="POST" class="row g-3">
             <div class="col-4">
@@ -104,7 +104,7 @@
                         echo "<td class='p-3'>" . $row["createdDate"] . "</td>";
                         echo "<td class='p-3'>" . $row["title"] . "</td>";
                         echo "<td class='p-3'>" . $row["description"] . "</td>";
-                        echo "<td class='p-3'> <a href=" . "dbnotes.php?delid=" . $row["id"] . ">X</a> </td>";
+                        echo "<td class='p-3'> <a class='btn btn-outline-danger' href=" . "dbnotes.php?delid=" . $row["id"] . ">X</a> </td>";
                         echo "</tr>";
                     }
                 } else {

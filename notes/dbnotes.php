@@ -4,6 +4,12 @@
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
 
+    // Connect to the database
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "aiphp";
+
     // Check if the form has been submitted
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Get the form data
@@ -16,11 +22,7 @@
             $email="admin@gmail.com";
         }
 
-        // Connect to the database
-        $servername = "localhost";
-        $username = "root";
-        $password = "";
-        $dbname = "aiphp";
+        
 
         $conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -42,6 +44,19 @@
 
         // Close the statement and connection
         $stmt->close();
+        $conn->close();
+    }
+
+
+    //Check if a delete request is made
+    if(isset($_GET['delid'])){
+        $delid = $_GET['delid'];
+        $conn = new mysqli($servername, $username, $password, $dbname);
+        $sql = "DELETE FROM note WHERE id = $delid";
+        if($conn->query($sql) === TRUE){
+            header('Location:index.php?deleted');
+            exit();
+        };
         $conn->close();
     }
     
