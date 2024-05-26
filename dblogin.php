@@ -42,11 +42,13 @@ if ($result->num_rows === 1) {
         exit();
     } else {
         // Invalid password
-        echo "Invalid password. Please try again.";
+        header("Location: login.php?error");
+        exit();
     }
 } else {
     // Invalid email or user does not exist
-    echo "Invalid email or user does not exist.";
+    header("Location: login.php?error");
+    exit();
 }
 
 // Close the database connection

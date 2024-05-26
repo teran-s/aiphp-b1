@@ -59,6 +59,17 @@
             </div>
             <button type="submit" class="btn btn-primary fs-5 fw-light">Login</button>
         </form>
+
+        <?php
+
+        if(isset($_GET['error'])) {
+          echo('
+           <div id="alertbox" class="alert alert-danger mt-3" role="alert">
+              Email or Password is incorrect
+          </div>');
+        }
+        
+        ?>
     </div>
    
 
