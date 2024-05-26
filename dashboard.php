@@ -36,9 +36,11 @@
         }
         .dash-card{
           text-decoration: none;
+          transition:all 0.5s;
         }
         .dash-card:hover{
-          box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+          box-shadow: 0 0 10px rgba(64, 79, 219, 0.5);
+          transform: scale(1.02);
         }
     </style>
 </head>
@@ -84,7 +86,7 @@
           
       </div>
     </div>
-    
+
    
 
     
