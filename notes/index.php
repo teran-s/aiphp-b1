@@ -53,26 +53,16 @@
         </div>
     </nav>
 
-    <div class="container-md text-center mt-1" style="max-width: 700px;">
+    <div class="container-md text-center mt-1" style="max-width: 800px;">
         <div class="mb-2 hero-text">Notes App</div>
-
-        <div class="row">
-            <div class="col-md-5">
-                <div class="form-group">
-                    <input type="text" class="form-control" id="title" placeholder="Title">
-                </div>
-            </div>
-            <div class="col-md-5">
-                <div class="form-group">
-                    <textarea class="form-control" id="description" placeholder="Description"></textarea>
-                </div>
-            </div>
-            <div class="col-md-2 text-right">
-                <button type="submit" class="btn btn-success">Add</button>
-            </div>
-        </div>
+        <form action="dbnotes.php" method="POST">
+            <input type="text" class="form-control" id="title" name="title" placeholder="Title"/>
+            <textarea class="form-control" id="description" name="description" placeholder="Description"></textarea>
+            <button type="submit" class="btn btn-success">Add</button>
+        </form>
 
     </div>
+   
 
 
 
