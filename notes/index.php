@@ -55,10 +55,16 @@
 
     <div class="container-md text-center mt-1" style="max-width: 800px;">
         <div class="mb-2 hero-text">Notes App</div>
-        <form action="dbnotes.php" method="POST">
-            <input type="text" class="form-control" id="title" name="title" placeholder="Title"/>
-            <textarea class="form-control" id="description" name="description" placeholder="Description"></textarea>
+        <form action="dbnotes.php" method="POST" class="row g-3">
+            <div class="col-4">
+                <input type="text" class="form-control" id="title" name="title" placeholder="Title"/>
+            </div>
+            <div class="col-7">
+                <input type="text" class="form-control" id="description" name="description" placeholder="Description"></input>
+            </div>
+            <div class="col-1">
             <button type="submit" class="btn btn-success">Add</button>
+            </div>
         </form>
 
     </div>
