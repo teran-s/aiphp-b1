@@ -17,7 +17,6 @@
         text-align: center;
         color: #333;
         font-size: 5rem;
-        margin-top: 10vh;
         font-weight: 100;
     }
     </style>
@@ -53,19 +52,70 @@
         </div>
     </nav>
 
-    <div class="container-md text-center mt-1" style="max-width: 800px;">
+    <div class="container-md text-center " style="max-width: 800px;">
         <div class="mb-2 hero-text">Notes App</div>
         <form action="dbnotes.php" method="POST" class="row g-3">
             <div class="col-4">
-                <input type="text" class="form-control" id="title" name="title" placeholder="Title"/>
+                <input type="text" class="form-control" id="title" name="title" placeholder="Title" required/>
             </div>
             <div class="col-7">
-                <input type="text" class="form-control" id="description" name="description" placeholder="Description"></input>
+                <input type="text" class="form-control" id="description" name="description" placeholder="Description" required></input>
             </div>
             <div class="col-1">
             <button type="submit" class="btn btn-success">Add</button>
             </div>
         </form>
+
+        <table class="table mt-5">
+            <thead>
+                <tr>
+                    <th>Date Created</th>
+                    <th>Title</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                // Connect to the MySQL database
+                $servername = "localhost";
+                $username = "root";
+                $password = "";
+                $dbname = "aiphp";
+
+                $conn = new mysqli($servername, $username, $password, $dbname);
+
+                // Check connection
+                if ($conn->connect_error) {
+                    die("Connection failed: " . $conn->connect_error);
+                }
+
+                // SQL query to select the desired columns from the "Employee" table
+                $sql = "SELECT id,createdDate,title,description FROM note ORDER BY createdDate DESC";
+
+                // Execute the query
+                $result = $conn->query($sql);
+
+                // Check if the query was successful
+                if ($result) {
+                    // Fetch the rows
+                    while ($row = $result->fetch_assoc()) {
+                        // Display the data in table rows
+                        echo "<tr>";
+                        echo "<td class='p-3'>" . $row["createdDate"] . "</td>";
+                        echo "<td class='p-3'>" . $row["title"] . "</td>";
+                        echo "<td class='p-3'>" . $row["description"] . "</td>";
+                        echo "<td class='p-3'> <a href=" . "dbnotes.php?delid=" . $row["id"] . ">X</a> </td>";
+                        echo "</tr>";
+                    }
+                } else {
+                    echo "Error: " . $sql . "<br>" . $conn->error;
+                }
+
+                // Close the connection
+                $conn->close();
+                ?>
+            </tbody>
+        </table>
 
     </div>
    

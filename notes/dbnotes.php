@@ -34,7 +34,8 @@
         $stmt->bind_param("sss", $title, $description,$email);
 
         if ($stmt->execute()) {
-            echo "Data inserted successfully";
+            header('Location:index.php?inserted');
+            exit();
         } else {
             echo "Error: " . $stmt->error;
         }
