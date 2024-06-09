@@ -80,6 +80,11 @@
             <img src="img/dash/notes.png" class="card-img-top" alt="..."/>
             <h3 class="dash-card-text">Notes App</h3>
             </a>
+            &ensp;
+            <a class="col-4 dash-card card p-3 rounded-5" style="width: 18rem;" href="tasks/index.php">
+            <img src="img/dash/task.png" class="card-img-top" alt="..."/>
+            <h3 class="dash-card-text">Tasks App</h3>
+            </a>
             
           
       </div>
