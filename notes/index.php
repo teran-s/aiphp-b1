@@ -66,18 +66,49 @@
             <div class="col-4">
                 <input type="text" class="form-control" id="title" name="title" placeholder="Title" required/>
             </div>
-            <div class="col-7">
+            <div class="col-6">
                 <input type="text" class="form-control" id="description" name="description" placeholder="Description" required></input>
             </div>
             <div class="col-1">
-            <button type="submit" class="btn btn-success">Add</button>
+            <button type="submit" class="btn btn-success"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+  <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3z"/>
+</svg></button>
+            
+            </div>
+
+            <div class="col-1">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#searchModal">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+  <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+</svg>
+
+</button>
             </div>
         </form>
+<!-- Modal -->
+<div class="modal fade " id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      
+      <div class="modal-body">
+        <form action="" method="GET">
+          
+        <div class="input-group mb-3">
+        <input type="text" name="search" class="form-control" placeholder="Spotlight Search" aria-label="Spotlight Search" aria-describedby="basic-addon2">
+            <button class="input-group-text" id="basic-addon2" type="submit">Search</button>
+        </div>
+                
+        </form>
+      </div>
+    </div>
+  </div>
+  </div>
 
+<!-- Modal Ends -->
         <table class="table mt-5">
             <thead>
                 <tr>
-                    <th>Date Created</th>
+                    <th>Date Created</th> 
                     <th>Title</th>
                     <th>Description</th>
                 </tr>
@@ -98,8 +129,19 @@
                     die("Connection failed: " . $conn->connect_error);
                 }
 
-                // SQL query to select the desired columns from the "Employee" table
-                $sql = "SELECT id,createdDate,title,description FROM note WHERE email = '$email' ORDER BY createdDate DESC";
+                //Check if a search request is made
+                if(isset($_GET['search'])){
+                    $search=$_GET['search'];
+                    if($search==''){
+                        //All the records
+                        $sql = "SELECT id,createdDate,title,description FROM note WHERE email = '$email' ORDER BY createdDate DESC";
+                    }
+                    $sql = "SELECT id,createdDate,title,description FROM note WHERE email = '$email' AND title LIKE '%$search%' ORDER BY createdDate DESC";
+                }else{
+                    // SQL query to select the desired columns from the "Employee" table
+                    $sql = "SELECT id,createdDate,title,description FROM note WHERE email = '$email' ORDER BY createdDate DESC";
+                }
+
 
                 // Execute the query
                 $result = $conn->query($sql);
