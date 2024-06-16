@@ -59,13 +59,13 @@
     </nav>
 
     <div class="container-md text-center " style="max-width: 850px;">
-        <div class="mb-2 hero-text">Notes App</div>
-        <form action="dbnotes.php" method="POST" class="row g-3">
+        <div class="mb-2 hero-text">Tasks App</div>
+        <form action="dbtasks.php" method="POST" class="row g-3">
             <div class="col-4">
-                <input type="text" class="form-control" id="title" name="title" placeholder="Title" required/>
+                <input type="text" class="form-control" id="title" name="listname" placeholder="List Name" required/>
             </div>
             <div class="col-6">
-                <input type="text" class="form-control" id="description" name="description" placeholder="Description" required></input>
+                <input type="text" class="form-control" id="description" name="caption" placeholder="Caption" required></input>
             </div>
             <div class="col-1">
             <button type="submit" class="btn btn-success"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
@@ -132,12 +132,12 @@
                     $search=$_GET['search'];
                     if($search==''){
                         //All the records
-                        $sql = "SELECT id,createdDate,title,description FROM note WHERE email = '$email' ORDER BY createdDate DESC";
+                        $sql = "SELECT ListName,Caption,CreatedDate FROM TaskList WHERE email = '$email' ORDER BY CreatedDate DESC";
                     }
-                    $sql = "SELECT id,createdDate,title,description FROM note WHERE email = '$email' AND title LIKE '%$search%' ORDER BY createdDate DESC";
+                    $sql = "SELECT ListName,Caption,CreatedDate FROM TaskList WHERE email = '$email' AND ListName LIKE '%$search%' ORDER BY CreatedDate DESC";
                 }else{
                     // SQL query to select the desired columns from the "Employee" table
-                    $sql = "SELECT id,createdDate,title,description FROM note WHERE email = '$email' ORDER BY createdDate DESC";
+                    $sql = "SELECT ListName,Caption,CreatedDate FROM TaskList WHERE email = '$email' ORDER BY CreatedDate DESC";
                 }
 
 
@@ -150,10 +150,10 @@
                     while ($row = $result->fetch_assoc()) {
                         // Display the data in table rows
                         echo "<tr>";
-                        echo "<td class='p-3'>" . $row["createdDate"] . "</td>";
-                        echo "<td class='p-3'>" . $row["title"] . "</td>";
-                        echo "<td class='p-3'>" . $row["description"] . "</td>";
-                        echo "<td class='p-3'> <a class='btn btn-outline-danger' href=" . "dbnotes.php?delid=" . $row["id"] . ">X</a> </td>";
+                        echo "<td class='p-3'>" . $row["CreatedDate"] . "</td>";
+                        echo "<td class='p-3'>" . $row["ListName"] . "</td>";
+                        echo "<td class='p-3'>" . $row["Caption"] . "</td>";
+                        echo "<td class='p-3'> <a class='btn btn-outline-danger' href=" . "dbtasks.php?delid=" . $row["ListName"] . ">X</a> </td>";
                         echo "</tr>";
                     }
                 } else {
