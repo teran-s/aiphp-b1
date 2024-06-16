@@ -4,6 +4,13 @@
         header('Location: ../login.php');
         exit();
     }
+    if(isset($_GET['listname']) && isset($_GET['cdate'])){
+        $lname=$_GET['listname'];
+        $cdate=$_GET['cdate'];
+    }else{
+        header('Location: ../tasks/index.php');
+        exit;
+    }
 ?>
 
 <!doctype html>
@@ -59,14 +66,14 @@
     </nav>
 
     <div class="container-md text-center " style="max-width: 850px;">
-        <div class="mb-2 hero-text">Tasks App</div>
-        <form action="dbtasks.php" method="POST" class="row g-3">
-            <div class="col-4">
-                <input type="text" class="form-control" id="title" name="listname" placeholder="List Name" required/>
+        <div class="hero-text"><?php echo ($lname); ?><br/></div>
+        <span class="text-secondary fs-3 mt-0 pt-0"> <?php echo ($cdate); ?></span>
+        <form action="dbitems.php?listname=<?php echo ($lname); ?>&cdate=<?php echo ($cdate); ?>" method="POST" class="row g-3 mt-1">
+            <div class="col-10 ">
+                <input type="text" class="form-control" id="title" name="description" placeholder="Description" required/>
+                
             </div>
-            <div class="col-6">
-                <input type="text" class="form-control" id="description" name="caption" placeholder="Caption" required></input>
-            </div>
+    
             <div class="col-1">
             <button type="submit" class="btn btn-success"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
   <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3z"/>
@@ -103,15 +110,10 @@
   </div>
 
 <!-- Modal Ends -->
-        <table class="table mt-5">
-            <thead>
-                <tr>
-                    <th>Date Created</th> 
-                    <th>List Name</th>
-                    <th>Caption</th>
-                </tr>
-            </thead>
-            <tbody>
+        <div style="text-align: left">
+        <ul class="list-group">
+            
+            
                 <?php
                 // Connect to the MySQL database
                 $servername = "localhost";
@@ -132,12 +134,12 @@
                     $search=$_GET['search'];
                     if($search==''){
                         //All the records
-                        $sql = "SELECT ListName,Caption,CreatedDate FROM TaskList WHERE email = '$email' ORDER BY CreatedDate DESC";
+                        $sql = "SELECT ItemId,Description,Status FROM Item WHERE ListName = '$lname';";
                     }
-                    $sql = "SELECT ListName,Caption,CreatedDate FROM TaskList WHERE email = '$email' AND ListName LIKE '%$search%' ORDER BY CreatedDate DESC";
+                    $sql = "SELECT ItemId,Description,Status FROM Item WHERE email = '$email' AND Description LIKE '%$search%'";
                 }else{
                     // SQL query to select the desired columns from the "Employee" table
-                    $sql = "SELECT ListName,Caption,CreatedDate FROM TaskList WHERE email = '$email' ORDER BY CreatedDate DESC";
+                    $sql = "SELECT ItemId,Description,Status FROM Item WHERE ListName = '$lname'";
                 }
 
 
@@ -148,15 +150,16 @@
                 if ($result) {
                     // Fetch the rows
                     while ($row = $result->fetch_assoc()) {
-                        $lname=$row["ListName"];
-                        $cdate=$row["CreatedDate"];
                         // Display the data in table rows
-                        echo "<tr>";
-                        echo "<td class='p-3'>" . $row["CreatedDate"] . "</td>";
-                        echo "<td class='p-3'><a href='../items/index.php?listname=" . $lname . "&cdate=" . $cdate . "'>" . $lname . "</a></td>";
-                        echo "<td class='p-3'>" . $row["Caption"] . "</td>";
-                        echo "<td class='p-3'> <a class='btn btn-outline-danger' href=" . "dbtasks.php?delid=" . $row["ListName"] . ">X</a> </td>";
-                        echo "</tr>";
+
+                       echo('<li class="list-group-item fs-4 fw-light">
+                            <input class="form-check-input me-1" type="checkbox" value="" id="'.$row['ItemId'].'">
+                            <label class="form-check-label stretched-link" for="'.$row['ItemId'].'">'.$row["Description"].'</label>
+                        ');
+                        
+                        
+                        echo " <a class='btn btn-outline-danger' href=" . "dbitems.php?delid=" . $row["ItemId"] . ">X</a> </li> ";
+                        
                     }
                 } else {
                     echo "Error: " . $sql . "<br>" . $conn->error;
@@ -165,9 +168,8 @@
                 // Close the connection
                 $conn->close();
                 ?>
-            </tbody>
-        </table>
-
+            </ul>
+        </div>
     </div>
    
 
