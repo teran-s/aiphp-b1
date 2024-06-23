@@ -56,11 +56,13 @@
 
     //Check if a delete request is made
     if(isset($_GET['delid'])){
+        $listname = $_GET['listname'];
+        $cdate=$_GET['cdate'];
         $delid = $_GET['delid'];
         $conn = new mysqli($servername, $username, $password, $dbname);
         $sql = "DELETE FROM Item WHERE ItemId = '".$delid."'";
         if($conn->query($sql) === TRUE){
-            header('Location:index.php?deleted');
+            header("Location:index.php?listname=" . $listname . "&cdate=" . $cdate . "");
             exit();
         };
         $conn->close();
